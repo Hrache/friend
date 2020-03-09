@@ -1,6 +1,4 @@
-window.headerVue = null;
-
-window.headerVue = new Vue({
+var headerVue = new Vue({
   el: "#pageheader",
   data: {
     sendemail: false,
@@ -14,9 +12,9 @@ window.headerVue = new Vue({
     logout(ev) {
       logout(ev);
 		}
-  },
-  mounted() {
-    if (window.loggedin) {
+	},
+	mounted() {
+		if (window.loggedin) {
 			var check, sessionCheckIntervalCallback, logoutAnchor;
 
 			try {
@@ -30,11 +28,11 @@ window.headerVue = new Vue({
 					axios
 						.post(window.sessionCheckURL)
 						.catch(function(error) {
-							console.log(this.logoutmodal);
+							headerVue.logoutmodal = true;
 						});
-        };
+				};
 
-        check = setInterval(
+				check = setInterval(
 					sessionCheckIntervalCallback,
 					window.sessionLifetime,
 					check,
@@ -44,6 +42,6 @@ window.headerVue = new Vue({
 			catch (errr) {
 				alert(errr.message);
 			}
-    }
-  }
+		}
+	}
 });
